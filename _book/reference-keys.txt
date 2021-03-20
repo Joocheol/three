@@ -1,2 +1,1 @@
-prerequisites
 financial-transctions

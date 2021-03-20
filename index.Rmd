@@ -1,7 +1,7 @@
 ---
-title: "Untitled"
-author: "Me"
-date: "3/21/2021"
+title: "Financial Engineering and TensorFlow"
+author: "Joocheol Kim"
+date: "Spring, 2021"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -14,7 +14,7 @@ link-citations: yes
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Prerequisites
+# Overview {-}
 
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
 
