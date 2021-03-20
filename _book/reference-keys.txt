@@ -1,1 +1,3 @@
 financial-transctions
+browian-motion
+barrier-options
