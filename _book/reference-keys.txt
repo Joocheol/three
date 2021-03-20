@@ -1,3 +1,2 @@
-r-markdown
-including-plots
 prerequisites
+financial-transctions
