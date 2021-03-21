@@ -5,6 +5,8 @@ date: "Spring, 2021"
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook: default
+  bookdown::pdf_document:
+   latex_engine: pdflatex
 documentclass: book
 link-citations: yes
 ---
