@@ -2,3 +2,9 @@
 # Financial Transctions
 
 4가지의 거래 형태
+
+```{tikz}
+\begin{tikzpicture}
+\draw (0,0) -- (5,5);
+\end{tikzpicture}
+```
