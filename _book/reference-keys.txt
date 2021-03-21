@@ -4,6 +4,7 @@ exm:unnamed-chunk-7
 financial-transctions
 거래계약라는-것은-무엇일까
 가지의-서로-다른-거래
+가지의-서로-다른-상품
 browian-motion
 barrier-options
 the-simplest-neural-network-ever
@@ -11,4 +12,3 @@ python
 linear-algebra
 calculus
 statistics
-가지의-서로-다른-상품
