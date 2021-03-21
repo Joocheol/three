@@ -25,14 +25,39 @@ pay와 receive를 시간과 함께 그려보겠습니다. $y$ 축 방향으로�
 
 
 (a)
-```{tikz, fig.align='center', echo=FALSE, out.width='80%'}
+```{tikz, fig.align='center', echo=FALSE, out.width='100%'}
+\begin{tikzpicture}
+\draw (-1,0) node {a} -- (6,0);
+\draw (0, 0.1) -- (0, -0.1) node[anchor=north west] {$0$};
+\draw (5, 0.1) -- (5, -0.1) node[anchor=north west] {$T$};
+
+\draw [->, very thick] (0,0) -- (0,1);
+\draw [->] (0,0) -- (0,-1);
+\end{tikzpicture}
 \begin{tikzpicture}
 \draw (-1,0) -- (6,0);
 \draw (0, 0.1) -- (0, -0.1) node[anchor=north west] {$0$};
 \draw (5, 0.1) -- (5, -0.1) node[anchor=north west] {$T$};
 
 \draw [->, very thick] (0,0) -- (0,1);
+\draw [->] (5,0) -- (5,-1);
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\draw (-1,0) -- (6,0);
+\draw (0, 0.1) -- (0, -0.1) node[anchor=north west] {$0$};
+\draw (5, 0.1) -- (5, -0.1) node[anchor=north west] {$T$};
+
+\draw [->, very thick] (5,0) -- (5,1);
 \draw [->] (0,0) -- (0,-1);
+\end{tikzpicture}
+\begin{tikzpicture}
+\draw (-1,0) -- (6,0);
+\draw (0, 0.1) -- (0, -0.1) node[anchor=north west] {$0$};
+\draw (5, 0.1) -- (5, -0.1) node[anchor=north west] {$T$};
+
+\draw [->, very thick] (5,0) -- (5,1);
+\draw [->] (5,0) -- (5,-1);
 \end{tikzpicture}
 ```
 
