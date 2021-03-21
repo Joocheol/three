@@ -1,8 +1,0 @@
-financial-transctions
-browian-motion
-barrier-options
-the-simplest-neural-network-ever
-python
-linear-algebra
-calculus
-statistics

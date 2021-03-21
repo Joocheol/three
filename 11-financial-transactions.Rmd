@@ -1,4 +1,0 @@
-# (PART) Financial Engineering {-}
-# Financial Transctions
-
-4가지의 거래 형태
