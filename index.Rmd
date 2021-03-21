@@ -21,10 +21,3 @@ knitr::opts_chunk$set(echo = TRUE)
 
 이 강의는 아직도 개발 중입니다. 계속해서 새로운 내용을 추가하도록 하겠습니다.
 
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
