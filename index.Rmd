@@ -6,7 +6,7 @@ site: bookdown::bookdown_site
 output: 
   bookdown::gitbook: default
   bookdown::pdf_document:
-   latex_engine: pdflatex
+    latex_engine: pdflatex
 documentclass: book
 link-citations: yes
 ---
