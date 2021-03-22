@@ -1,0 +1,178 @@
+# (PART) Financial Engineering {-}
+# Financial Transctions
+
+## 거래라는 것은 무엇일까?
+
+가장 간단한 형태의 거래부터 생각해 보겠습니다. 
+
+```{example, name="물물교환"}
+
+
+- Alice는 Brown에게 apple 1개를 주고, banana 2개를 받았다.
+- Brown은 Alice에게 banana 2개를 주고, apple 1개를 받았다. 
+```
+
+화폐가 등장하면 위의 거래를 다음과 같이 표현할 수 있습니다. 이 예에서 apple은 먹는 사과를 생각해도 되고, 애플 주식으로 생각해도 됩니다.
+
+```{example, name="화폐의 등장"}
+
+
+- Alice는 Brown에게 apple 1개를 주고, (바나나가 아니라) Bananacoin 2원을 받았다. 즉 apple을 2원에 팔았다.
+- Brown은 Alice에게 bananacoin 2원을 주고, 애플 1개를 받았다. 즉, apple을 2원에 샀다. 
+```
+
+
+가장 이해하기 쉬운 거래는 **사다**와 **팔다**가 동시에 일어나는 형태입니다. 내가 무엇인가를 산다는 것과 동시에 상대방이 그 무엇인가를 파는 거래입니다. 이 형태의 거래는 **주다(pay)**와 **받다(receive)**가 동시에 일어나는 것으로 해석할 수 있습니다.
+
+
+그러면 pay와 receive가 동시에 이루어지지 않는 거래도 있을까요?
+
+```{example, name="신용거래"}
+
+
+- 기원전 1234년 1월 1일에 Alice는 Brown에게 apple 10개를 주고, 기원전 1234년 12월 31일에 apple 12개를 받기로 하다.
+- 기원전 1234년 1월 1일에 Brown은 Alice에게 apple 10개를 받고, 기원전 1234년 12월 31일에  apple 12개를 주기로 하다. 
+```
+
+마치 돈을 빌려주고 이자와 원금을 받는 것처럼 생각할 수 있는 거래입니다. 하지만 화폐와 신용 거래가 합쳐진 거래는 오랜 기간 금기시되어 왔습니다.
+
+```{example, name="금기시 되었던 거래"}
+
+
+- 1234년 1월 1일에 Alice는 Brown에게 금화 10개를 주고, 1234년 12월 31일에 금화 12개를 받기로 하다.
+- 1234년 1월 1일에 Brown은 Alice에게 금화 10개를 받고, 1234년 12월 31일에 금화 12개를 주기로 하다. 
+```
+
+현대를 사는 우리에게 이자는 당연한 것으로 여겨지지만, 역사적으로 오랜 기간동안 화폐에 대하여 이자(고리대금)를 받는 거래는 금기시 되었던 거래였습니다. 세익스피어의 "베니스의 상인"에 나오는 샤일록과 같은 유태인들만 할 수 있는 거래이었고, 지금도 특정 종교 하에서는 금지되어 있는 경우도 있습니다.
+
+
+```{example, name="주식의 등장"}
+
+
+- 1654년 1월 1일에 Alice는 Brown에게 금화 10개를 주고, 1666년 12월 31일에 금화 10개 지분만큼의 수익을 받기로 하다.
+- 1654년 1월 1일에 Brown은 Alice에게 금화 10개를 받고, 1666년 12월 31일에 금화 10개 지분만큼의 수익을 주기로 하다. 
+```
+
+네덜란드 동인도회사에서 시작되었습니다.
+
+## 4가지의 서로 다른 거래
+
+이상의 논의를 정리하는 방법으로 pay와 receive를 시간과 함께 그려보겠습니다. $y$ 축 방향으로의 굵은 선은 apple, 보통 굵기의 선은 돈이고, 플러스 방향을 receive, 마이너스 방향을 pay로 생각하겠습니다. $x$축은 시간을 표시 합니다. $t=0$과 $t=T$이 있습니다. $T$는 우리가 지정한 특정 시점을 의미합니다. 1년 후로 생각해도 되고, 1개월 후로 생각해도 됩니다. $0$은 현재 시점입니다.
+
+
+```{tikz, fig.align='center', echo=FALSE, out.width='100%'}
+\begin{tikzpicture}
+\node at (-1,0) {(a)};
+\draw (-0.5,0) -- (5.5,0);
+\draw (0, 0.1) -- (0, -0.1) node[anchor=north west] {$0$};
+\draw (5, 0.1) -- (5, -0.1) node[anchor=north west] {$T$};
+
+\draw [->, very thick] (0,0) -- (0,1);
+\draw [->] (0,0) -- (0,-1);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\node at (-1,0) {(b)};
+\draw (-0.5,0) -- (5.5,0);
+\draw (0, 0.1) -- (0, -0.1) node[anchor=north west] {$0$};
+\draw (5, 0.1) -- (5, -0.1) node[anchor=north west] {$T$};
+
+\draw [->, very thick] (0,0) -- (0,1);
+\draw [->] (5,0) -- (5,-1);
+\end{tikzpicture}
+
+\vspace{1cm}
+
+\begin{tikzpicture}
+\node at (-1,0) {(c)};
+\draw (-0.5,0) -- (5.5,0);
+\draw (0, 0.1) -- (0, -0.1) node[anchor=north west] {$0$};
+\draw (5, 0.1) -- (5, -0.1) node[anchor=north west] {$T$};
+
+\draw [->, very thick] (5,0) -- (5,1);
+\draw [->] (0,0) -- (0,-1);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}
+\node at (-1,0) {(d)};
+\draw (-0.5,0) -- (5.5,0);
+\draw (0, 0.1) -- (0, -0.1) node[anchor=north west] {$0$};
+\draw (5, 0.1) -- (5, -0.1) node[anchor=north west] {$T$};
+
+\draw [->, very thick] (5,0) -- (5,1);
+\draw [->] (5,0) -- (5,-1);
+\end{tikzpicture}
+```
+
+
+하나씩 살펴보겠습니다.
+
+(a)는 우리가 일상적으로 생각하는 거래입니다. 1000을 pay하고, apple을 receive합니다.
+
+(b)는현재 시점 $t=0$에 apple을 recieve하고, 미래의 특정 시점 $t=T$에 일정금액을 pay합니다. 이러한 거래는 신용을 기반으로 하는 거래로, 은행의 대출, 또는 채권(bond)이라는 금융상품과 관련이 있습니다.
+
+```{example, name="신용을 기반으로 한 거래, credit transaction, debt security와 관련이 있음"} 
+
+
+(b)와 같은 형태의 거래를 예를 들어 보면,
+
+1. 은행에서 1개월 만기 대출을 받아 apple을 사고, 1개월 후에 원금과 이자를 갚는다.
+
+2. 1개월 만기 채권을 발행하여, 채권가격 1000으로 현재시점에서 apple을 사고, 1개월 후 채권의 소유자에게 채권의 원금이 1000과 정하여진 coupon (채권 발행시 미리 정한 이자를 의미함)을 지불한다.
+
+3. 신용카드를 이용하여 apple을 사고, 1개월 후 신용카드 대금을 갚는다.
+
+```
+
+```{example, name="equity security"}
+
+
+(c)는 주식이라는 금융상품의 초기 형태로 이해할 수 있습니다. 주식의 시작은 네덜란드 동인도 회사가 투자자금의 소유권에 대한 증서를 발행하는 것으로부터 시작되었습니다.
+```
+
+## 3가지의 서로 다른 상품
+
+(채권)
+```{tikz, fig.align='center', echo=FALSE, out.width='80%'}
+\begin{tikzpicture}
+\draw (-1,0) -- (6,0);
+\draw (0, 0.1) -- (0, -0.1) ;
+\draw (5, 0.1) -- (5, -0.1) ;
+
+\draw [->] (0,0) -- (0,-1);
+\draw [->, thick] (5,0) -- (5,1.1);
+\end{tikzpicture}
+```
+
+
+(주식)
+```{tikz, fig.align='center', echo=FALSE, out.width='80%'}
+\begin{tikzpicture}
+\draw (-1,0) -- (6,0);
+\draw (0, 0.1) -- (0, -0.1) ;
+\draw (5, 0.1) -- (5, -0.1) ;
+
+\draw [->,dotted, thick] (5,0) -- (5,1);
+\draw [->] (0,0) -- (0,-1);
+\end{tikzpicture}
+```
+
+
+(선도거래)
+```{tikz, fig.align='center', echo=FALSE, out.width='80%'}
+\begin{tikzpicture}
+\draw (-1,0) -- (6,0);
+\draw (0, 0.1) -- (0, -0.1) ;
+\draw (5, 0.1) -- (5, -0.1) ;
+
+\draw [->, dotted, thick] (5,0) -- (5,1);
+\draw [->, thick] (5,0) -- (5,-1.1);
+\end{tikzpicture}
+```
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/RqqxkxpELXc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+```{example, name="cash flow diagram"}
+
+```
+
