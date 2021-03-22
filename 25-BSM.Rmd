@@ -1,0 +1,123 @@
+# Black-Scholes-Merton 미분방정식 \label{section-BSM}
+
+{~}
+%\vfill
+\begin{center}
+\begin{minipage}{0.8\textwidth}
+\footnotesize
+Black-Scholes-Merton 미분방정식은 1973년 Black과 Scholes의 논문에서 최초로 세상에 알려졌으며, 그 이후 많은 파생상품의 가격식이 이 미분방정식의 해 (solution)를 구하여 도출할 수 있음이 알려지면서, 금융공학의 기본이 되는 식이 되었다.
+\\
+\\
+그러나 불행하게도 Black-Scholes-Merton 미분방정식의 도출 과정은 stochastic calculus, 특히 Ito's lemma라는 수준 높은 수학 이론을 기반으로 하고 있어서, 많은 사람들이 도출 과정을 이해하는데 어려움을 겪었다.
+\\
+\\
+본 장에서는 Ito's lemma를 설명하고, 이를 이용하여 Black-Scholes-Merton 미분방정식을 도출하는 과정을 직관적으로 설명하고자 한다. 수학적 정밀함은 다소 떨어질 수 있으나, 지난 10여년의 강의 경험에 미루어 볼 때, 약간의 노력만 가한다면 대부분의 독자가 그 도출 과정을 충분히 이해할 수 있을 것으로 믿는다.
+\\
+\\
+수학적 정교함을 더 필요로 하는 독자는 이 장 마지막의 참고문헌을 참고하기 바란다.
+
+ 
+\end{minipage}
+
+\vspace{10pt}
+
+%\includegraphics[width=0.8\textwidth]{images/photos/11.jpg}
+\end{center}
+%
+%
+\newpage
+\subsection{Ito's lemma}
+
+일반 미적분학에서 이변수 함수 $f(x,y)$의 전미분 (total differentiation)\index{전미분}은
+\begin{equation}\label{totaldiff}
+df = \frac{\partial f}{\partial x} dx + \frac{\partial f}{\partial y} dy
+\end{equation}
+으로 표현된다. 식 (\ref{totaldiff}) 의미는 특정한 점 $(x_0, y_0)$ 부근에서의 함수값 $f$의 작은 변화량, $\Delta f = f(x,y) - f(x_0, y_0)$는 이 함수의 $x$축 방향으로의 $f$의 변화량과 $y$축 방향으로의 $f$의 변화량의 합으로 근사화 될 수 있다는 것이다. 여기서,  $x$ 축 방향으로의 $f$의 변화량은 $x$에 대한 편미분 $\partial f / \partial x$과 $\Delta x = (x-x_0)$의 곱으로 나타내고, $y$ 축 방향으로의 $f$의 변화량은 $y$ 대한 편미분 $\partial f / \partial y$과 $\Delta y = (y-y_0)$의 곱으로 표현된다. 
+\\
+\\
+이를 테일러 전개\index{테일러 전개} (Taylor expansion\index{Taylor expansion})의 관점에서 생각해 보기로 하자. 미분가능한 임의의 함수 $f(x,y)$를 이차항까지 Taylor 전개하면,
+\begin{eqnarray}\label{Taylor}
+\Delta f &=& \frac{\partial f}{\partial x} \Delta x + \frac{\partial f}{\partial y} \Delta y \\
+ &+& \frac{1}{2}\frac{\partial^2 f}{\partial x^2} \, (\Delta x)^2 +  \frac{1}{2} \frac{\partial^2 f}{\partial y^2} \,(\Delta y)^2 + \frac{\partial^2 f}{\partial x \partial y} \, (\Delta x)(\Delta y) + \cdots \nonumber
+\end{eqnarray}
+이 된다. 식 (\ref{Taylor})에 $\Delta x$와 $\Delta y$를 점점 작게하여 0에 가깝게 만들면 만들수록  $\Delta x$ 의 1승 보다 높은 차수를 갖는 항, 즉  $(\Delta x)^2$,  $(\Delta x)^3$등의 항은 더욱 빠른 속도로 0으로 수렴하게 된다. 이는  $\Delta y$에 대하여서도 마찬가지이고, 교차항인  $(\Delta x)(\Delta y)$에 대하여서도 마찬가지이다.
+\\
+\\
+이는 0.1을 제곱하면, 0.01이 되어 원래의 숫자보다 더욱 작은 숫자가 되는 것으로 이해하여 직관적으로 받아들일 수도 있고, 또는 수학적으로 증명을 할 수도 있다. 따라서 식 (\ref{Taylor})로부터 $\Delta x$와 $\Delta y$를 점점 작게하여 0에 가깝게 만들면 식 (\ref{totaldiff})이 됨을 알 수 있다.
+\\
+\\
+이제 우리에게 주어진 이변수 함수를 $f(W_t, t)$라고 가정하여 보자. 여기서 $t$는 앞선 $x$나 $y$처럼 보통의 변수로서 시간을 의미하는 변수이지만, $W_t$는 브라운 운동을 나타내는 확률변수이다. 이러한 경우 $f(W_t, t)$의 미분을 식(\ref{totaldiff})와 같은 형식으로 쓸 수 있을까? 결론부터 이야기하면 "No``이다.
+\\
+\\
+그 이유를 이해하기 위해서 다시 테일러 전개\index{테일러 전개} (Taylor expansion\index{Taylor expansion})로 되돌아가 보자. 식 (\ref{Taylor})를 우리에게 주어진 $f(W_t, t)$에 적용하면
+\begin{eqnarray}\label{Taylor2}
+\Delta f &=& \frac{\partial f}{\partial W_t} \Delta W_t + \frac{\partial f}{\partial t} \Delta t \\
+&+&  \frac{1}{2} \frac{\partial^2 f}{\partial W_t^2} \, (\Delta W_t)^2 +  \frac{1}{2} \frac{\partial^2 f}{\partial t^2} \,(\Delta t)^2 + \frac{\partial^2 f}{\partial W_t \partial y} \, (\Delta W_t)(\Delta t) + \cdots \nonumber
+\end{eqnarray}
+이 된다. 식(\ref{Taylor})에서 2차 이상의 항과 교차항이 모두 없어질 수 있었던 이유는
+$\Delta x$와 $\Delta y$를 점점 작게하여 0에 가깝게 만들수록 이차 이상의 항과 교차항이 모두 더 빠른 속도로 0으로 가기 때문이었다. 그러나 식(\ref{Taylor2})에서는  $(\Delta t)^2$항에 대하여서는 같은 논리를 적용할 수 있으나,  $(\Delta W_t)^2$에는 같은 논리를 적용할 수 없다.
+\\
+\\
+식(\ref{Taylor2})의 $(\Delta W_t)^2$는 브라운 운동의 quadratic variation\index{quadratic variation}이기 때문이다. 우리는 이미 앞 장에서 브라운 운동의 quadratic variaion은  $(\Delta W_t)^2 = dt$로 해석할 수 있음을 보였다. 따라서 식(\ref{Taylor2})는
+\begin{equation}\label{Ito}
+\Delta f = \frac{\partial f}{\partial W_t} \Delta W_t + \frac{\partial f}{\partial t} \Delta t +  \frac{1}{2} \frac{\partial^2 f}{\partial W_t^2} \, (\Delta W_t)^2
+\end{equation}
+로 바뀌고, 이를 미분형으로 바꾸면,
+\begin{equation}\label{Ito2}
+ df = \frac{\partial f}{\partial W_t} d W_t + \frac{\partial f}{\partial t} dt +  \frac{1}{2} \frac{\partial^2 f}{\partial W_t^2} \, dt
+\end{equation}
+이 된다. 이를 Ito's Lemma라 한다.
+
+
+\newpage
+\subsection{Ito's lemma의 응용}
+Ito's lemma는 stochastic calculus의 중요한 결과물로 본 장의 주제인 Black-Scholes-Merton 미분방정식의 유도는 그 응용의 하나이다. 본 절에서는 금융공학과 직접적 관련은 없지만, Ito's lemma의 여러가지 응용 예를 소개함으로 그 중요성을 강조하고자 한다. 본 주제인 Black-Scholes-Merton 미분방정식의 유도만이 관심인 경우에는 본 절을 뛰어 넘어도 논리적 연결에 아무런 문제가 없음을 밝혀둔다.
+
+
+\newpage
+\subsection{Black-Scholes-Merton 미분방정식의 유도}
+우선 기초자산 $S_t$의 움직임이 다음의 stochastic differential equation을 따르는 것으로 가정하자.
+\begin{equation}\label{underlying}
+dS_t = \mu S_t dt + \sigma S_t dW_t
+\end{equation}
+여기서 $\mu$는 기초자산의 기대 수익률, $\sigma$는 기초자산의 변동성을 표현하며, 이들은 시간에 의존하지 않은 알려진 상수로 가정한다. 실제로 이를 어떻게 추정하는가는 실무적으로로 매우 중요하지만, 이론을 전개하는데는 불필요한 논의이므로 우리는 이 값들을 미리 알고 있다고 가정한다.
+\\
+\\
+다음으로 우리가 알고자 하는 파생상품의 가격식을 $F(S_t, t)$로 나타내기로 하자. 상품의 가격이 기초자산의 가격에 의존하는 상품을 파생상품이라고 정의하였던 것을 상기하면, $F(\cdot,\cdot)$라는 파생상품의 가격식의 input으로 $S_t$가 들어가는 것은 당연하게 받아들일 수 있을 것이다. 또한 파생상품의 가격이 시간에 의존하고, 만기가 존재한다는 것을 생각하면, $F(S_t, \cdot)$ 함수의 input으로 $t$도 들어가야 한다고 미루어 짐작할 수 있을 것이다.
+\\
+\\
+기초자산의 가격을 (\ref{underlying})으로 가정하였으므로, 다음 스텝은 $F(S_t, t)$로 나타내기로 한 파생상품의 가격식이 어떠한 stochastic differential equation을 따르는가를 찾을 필요가 있다. 이를 위하여 $F(S_t, t)$를 다시 살펴보면 $S_t$는 브라운 운동의 영향을 받는 변수이고, $t$는 일반적인 변수이므로 앞서 배운 Ito's lemma를 적용시키기에 적합한 모양을 가지고 있다는 것을 알 수 있다. 
+\\
+\\
+따라서 $F(S_t, t)$에 Ito's lemma를 적용시키면
+\begin{eqnarray}
+dF &=& \frac{\partial F}{\partial S_t} dS_t + \frac{\partial F}{\partial t} dt + \frac{1}{2}\frac{\partial^2 F}{\partial S_t^2} (dS_t)^2 \\
+&=& \frac{\partial F}{\partial S_t} \left(\mu S_t dt + \sigma S_t dW_t\right)  + \frac{\partial F}{\partial t} dt + \frac{1}{2}\frac{\partial^2 F}{\partial S_t^2} \left( \mu S_t dt + \sigma S_t dW_t\right)^2
+\end{eqnarray}
+이 되고, 여기에 Ito's lemma의 곱셈규칙을 적용한 후, 주어진 식을 $dt$를 가진 항과 $dW_t$를 가진 항으로 다시 정리하면,
+\begin{equation}
+dF = \left(\mu S_t \frac{\partial F}{\partial S_t} + \frac{\partial F}{\partial t} + \frac{1}{2}\sigma^2 S_t^2 \frac{\partial^2 F}{\partial S_t^2} \right) dt + \left( \sigma S_t \frac{\partial F}{\partial S_t} \right) dW_t
+\end{equation}
+이 된다. 이 식은 비록 복잡하여 보이지만, 결국은 또 다른 하나의 stochastic differential equation일 뿐이다.
+\\
+\\
+이상까지의 유도는 비록 복잡하여 보이지만, 결국 Ito's lemma의 한 예에 불과하다. Black과 Scholes, 그리고 Merton의 훌륭한 idea는 이제부터 나타나기 시작한다.
+그들은 다음과 같은 가상의 포트폴리오를 생각한다.
+\begin{equation}
+\Pi = \Delta S_t + (-1) F
+\end{equation}
+즉, $\Pi$라 불리우는 이 포트폴리오는 하나의 파생상품을 팔고, 즉 $(-1) F$, $\Delta$개 만큼의 기초자산을 사서, 즉 $\Delta S_t$, 구성한 포트폴리오이다. 아직 $\Delta$는 우리가 결정하여야 하는 미지수이다. 이는 마치 CRR 모형에서 우리가 결정해야 할 $\Delta$와 같은 역할을 한다.
+
+이제 약간의 시간이 흐르면 우리가 구성한 가상의 포트폴리오의 가치도 변화할 것이다. 왜냐하면, 포트폴리오가 기초자산과 파생상품으로 구성되어 있기 때문에 시간의 변화에 따라 이들의 가치가 달라질 것이기 때문이다.
+
+이 가상의 포트폴리오의 가치의 변화를 $d\Pi$로 표시하면, 이는
+\begin{equation}
+d\Pi =\Delta dS_t + (-1) dF
+\end{equation} 
+인데, 우리는 이미 앞에서 $d S_t$와 $dF$에 해당하는 stochastic differential equation을 가정 및 유도하여 놓았다. 따라서 이들을 대입하면,
+\begin{eqnarray}
+d\Pi &=& \Delta dS_t + (-1) dF \\
+&=& \Delta \left( \mu S_t dt + \sigma S_t dW_t \right) \\
+&& - \left[ \left(\mu S_t \frac{\partial F}{\partial S_t} + \frac{\partial F}{\partial t} + \frac{1}{2}\sigma^2 S_t^2 \frac{\partial^2 F}{\partial S_t^2} \right) dt + \left( \sigma S_t \frac{\partial F}{\partial S_t} \right) dW_t \right] 
+\end{eqnarray}
+
