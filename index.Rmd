@@ -1,14 +1,11 @@
 ---
 title: "Financial Engineering and TensorFlow"
 author: "Joocheol Kim"
-date: "Spring, 2021"
+date: "`r Sys.Date()`"
+output:
+  bookdown::gitbook
 site: bookdown::bookdown_site
-output: 
-  bookdown::gitbook: default
-  bookdown::pdf_document:
-   latex_engine: pdflatex
 documentclass: book
-link-citations: yes
 ---
 
 ```{r setup, include=FALSE}

@@ -1,11 +1,1 @@
 bookdown::gitbook:
-  css: style.css
-  config:
-    toc:
-      before: |
-        <li><a href="./">Financial Engineering and TensorFlow</a></li>
-      after: |
-        <li><a href="https://github.com/Joocheol/three"></a></li>
-    download: ["pdf", "epub"]
-bookdown::pdf_book:
-bookdown::epub_book: default
