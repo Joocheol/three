@@ -1,9 +1,70 @@
+
 # (PART) Financial Engineering {-}
 # Financial Transctions
 
 ## 거래라는 것은 무엇일까?
 
-가장 간단한 형태의 거래부터 생각해 보겠습니다. 
+가장 간단한 형태의 거래부터 생각해 보겠습니다. 일단 그림을 통하여 사용할 기호를 설명하겠습니다.
+
+
+```{tikz, fig.cap="현재시점에 돈을 주다를 표시하는 방법입니다. 시점은 0입니다. 화살표는 아래쪽으로 그려져 있습니다.", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \path (-0.5, 1.5) -- (5.5,-1.0);
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+ 
+  \draw [->] (0,0) -- (0,-1);
+\end{tikzpicture}
+```
+위의 그림이 현재시점에 일정 금액을 **주다**를 표시하는 방법이다. 시점은 0입니다. 화살표는 아래쪽으로 그려져 있습니다. 아래쪽은 내 주머니에서 무엇인가가 나가는 것을 의미합니다.  
+
+
+```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+
+  \draw [->, double] (0,0) -- (0,-1);
+  \draw [->, dashed] (1,0) -- (1,-1);
+  \draw [->] (2,0) -- (2,-1);
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,-1);
+  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,-1);
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,-1);
+
+\draw [->, double] (0,0) -- (0,1);
+  \draw [->, dashed] (1,0) -- (1,1);
+  \draw [->] (2,0) -- (2,1);
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,1);
+  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,1);
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,1);
+\end{tikzpicture}
+```
+```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+
+  \draw [->, double] (0,0) -- (0,-1);
+  \draw [->, dashed] (1,0) -- (1,-1);
+  \draw [->] (2,0) -- (2,-1);
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,-1);
+  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,-1);
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,-1);
+
+\draw [->, double] (0,0) -- (0,1);
+  \draw [->, dashed] (1,0) -- (1,1);
+  \draw [->] (2,0) -- (2,1);
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,1);
+  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,1);
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,1);
+\end{tikzpicture}
+```
 
 ```{example, name="물물교환"}
 
@@ -25,6 +86,20 @@
 가장 이해하기 쉬운 거래는 **사다**와 **팔다**가 동시에 일어나는 형태입니다. 내가 무엇인가를 산다는 것과 동시에 상대방이 그 무엇인가를 파는 거래입니다. 이 형태의 거래는 **주다(pay)**와 **받다(receive)**가 동시에 일어나는 것으로 해석할 수 있습니다.
 
 
+
+```{tikz, fig.cap="화폐의 등장", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+
+  \draw [->] (0,0) -- (0,1);
+  \draw [->, double] (0,0) -- (0,-1);
+\end{tikzpicture}
+```
+
+
+
 그러면 pay와 receive가 동시에 이루어지지 않는 거래도 있을까요?
 
 ```{example, name="신용거래"}
@@ -36,6 +111,20 @@
 
 마치 돈을 빌려주고 이자와 원금을 받는 것처럼 생각할 수 있는 거래입니다. 하지만, 중요한 차이점이 있습니다. 곡물이나 가축을 빌려주고 시간이 지난 후 원래 빌려준 것 이상으로 받을 수 있는 이유는, 곡물을 땅에 심으면 더 많은 곡물을 얻을 수 있고, 가축은 새끼를 낳음으로 그 양이 늘어난다는 알고 있었기 때문입니다.
 
+
+```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+
+  \draw [->, double] (0,0) -- (0,-1);
+  
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,1);
+\end{tikzpicture}
+```
+
 그러나 우리에게는 익숙한 돈을 빌려주고 이자와 원금 받는, 화폐와 신용 거래가 합쳐진 거래는 오랜 기간 금기시되어 왔습니다.
 
 ```{example, name="금기시 되었던 거래"}
@@ -46,6 +135,19 @@
 ```
 
 현대를 사는 우리에게 이자는 당연한 것으로 여겨지지만, 역사적으로 오랜 기간동안 화폐에 대하여 이자(고리대금)를 받는 거래는 금기시 되었던 거래였습니다. 세익스피어의 "베니스의 상인"에 나오는 샤일록과 같은 유태인들만 할 수 있는 거래이었고, 지금도 특정 종교 하에서는 금지되어 있는 경우도 있습니다.
+
+```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+
+  \draw [->] (0,0) -- (0,-1);
+  
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,1);
+\end{tikzpicture}
+```
 
 곡물이나 가축과는 달리, 화폐는 스스로 화폐를 만들어내지 못한다는 점은 오랜 논쟁거리이었습니다. 우리는 화폐와 이자를 당연한 것으로 받아들이겠습니다.
 
