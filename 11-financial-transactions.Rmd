@@ -3,13 +3,13 @@
 
 ## 거래라는 것은 무엇일까?
 
-가장 간단한 형태의 거래부터 생각해 보겠습니다. 일단 그림을 통하여 사용할 기호를 설명하겠습니다.
+일단 그림을 통하여 사용할 기호를 설명하겠습니다.
 
 
-```{tikz, pay-money-0, fig.cap="pay money-0", fig.align="center", echo=FALSE}
+```{tikz, pay-money-0, fig.cap="pay money", fig.align="center", echo=FALSE}
 \usetikzlibrary{decorations.pathmorphing}
 \begin{tikzpicture}
-  \path (-0.5, 1.5) -- (5.5,-1.0);
+  \path (-0.5,0.5) -- (5.5,-1.0);
   \draw (-0.5,0) -- (5.5,0);
   \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
   \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
@@ -19,13 +19,13 @@
 ```
 
 
-그림 \@ref(fig:pay-money-0)에서 $x$축은 시간을 표시합니다. 현재 시점은 $0$이고 아래쪽으로 실선이 표시되어 있습니다. 실선은 돈을 의미하고, 아래쪽은 지불하는 것을 의미합니다. 따라서 이 그림은 **현재 시점에 돈을 pay하다**를 표시하는 그림입니다.
+그림 \@ref(fig:pay-money-0)에서 $x$축은 시간을 표시합니다. 현재 시점은 $0$이고 아래쪽으로 실선이 표시되어 있습니다. 실선은 돈을 의미하고, 아래쪽은 지불하는 것을 의미합니다. 따라서 이 그림은 **현재 시점 $0$에 돈을 pay하다**를 표시하는 그림입니다.
 
 
 ```{tikz, receive-money-0, fig.cap="receive money.", fig.align="center", echo=FALSE}
 \usetikzlibrary{decorations.pathmorphing}
 \begin{tikzpicture}
-  \path (-0.5, 1.5) -- (5.5,-1.0);
+  \path (-0.5, 1.5) -- (5.5,-0.5);
   \draw (-0.5,0) -- (5.5,0);
   \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
   \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
@@ -35,81 +35,13 @@
 ```
 
 
-그림 \@ref(fig:receive-money-0)는 반대로 **현재 시점 $0$에 돈을 받는다는 것**을 의미합니다.
+그림 \@ref(fig:receive-money-0)는 반대로 **현재 시점 $0$에 돈을 receive하다**를 의미합니다.
+
+```{example, name="spot transaction"}
 
 
-```{tikz, receive-money, fig.cap="receive money.", fig.align="center", echo=FALSE}
-\usetikzlibrary{decorations.pathmorphing}
-\begin{tikzpicture}
-  \path (-0.5, 1.5) -- (5.5,-1.0);
-  \draw (-0.5,0) -- (5.5,0);
-  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
-  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
- 
-  \draw [->] (0,0) -- (0,1);
-\end{tikzpicture}
-```
-
-
-```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
-\usetikzlibrary{decorations.pathmorphing}
-\begin{tikzpicture}
-  \draw (-0.5,0) -- (5.5,0);
-  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
-  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
-
-  \draw [->, double] (0,0) -- (0,-1);
-  \draw [->, dashed] (1,0) -- (1,-1);
-  \draw [->] (2,0) -- (2,-1);
-  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,-1);
-  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,-1);
-  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,-1);
-
-\draw [->, double] (0,0) -- (0,1);
-  \draw [->, dashed] (1,0) -- (1,1);
-  \draw [->] (2,0) -- (2,1);
-  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,1);
-  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,1);
-  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,1);
-\end{tikzpicture}
-```
-```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
-\usetikzlibrary{decorations.pathmorphing}
-\begin{tikzpicture}
-  \draw (-0.5,0) -- (5.5,0);
-  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
-  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
-
-  \draw [->, double] (0,0) -- (0,-1);
-  \draw [->, dashed] (1,0) -- (1,-1);
-  \draw [->] (2,0) -- (2,-1);
-  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,-1);
-  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,-1);
-  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,-1);
-
-\draw [->, double] (0,0) -- (0,1);
-  \draw [->, dashed] (1,0) -- (1,1);
-  \draw [->] (2,0) -- (2,1);
-  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,1);
-  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,1);
-  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,1);
-\end{tikzpicture}
-```
-
-```{example, name="물물교환"}
-
-
-- Alice는 Brown에게 apple 1개를 주고, banana 2개를 받았다.
-- Brown은 Alice에게 banana 2개를 주고, apple 1개를 받았다. 
-```
-
-화폐가 등장하면 위의 거래를 다음과 같이 표현할 수 있습니다. 이 예에서 apple은 먹는 사과를 생각해도 되고, 애플 주식으로 생각해도 됩니다.
-
-```{example, name="화폐의 등장"}
-
-
-- Alice는 Brown에게 apple 1개를 주고, (바나나가 아니라) Bananacoin 2원을 받았다. 즉 apple을 2원에 팔았다.
-- Brown은 Alice에게 bananacoin 2원을 주고, 애플 1개를 받았다. 즉, apple을 2원에 샀다. 
+- Alice는 Brown에게 apple 1개를 주고, 100원을 받았다. 즉 apple을 100원에 팔았다.
+- Brown은 Alice에게 100원을 주고, 애플 1개를 받았다. 즉, apple을 100원에 샀다. 
 ```
 
 
@@ -117,7 +49,7 @@
 
 
 
-```{tikz, fig.cap="화폐의 등장", fig.align="center", echo=FALSE}
+```{tikz, alice-0, fig.cap="Alice's view", fig.align="center", echo=FALSE}
 \usetikzlibrary{decorations.pathmorphing}
 \begin{tikzpicture}
   \draw (-0.5,0) -- (5.5,0);
@@ -128,21 +60,33 @@
 \end{tikzpicture}
 ```
 
+```{tikz, brown-0, fig.cap="Brown's view", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+
+  \draw [->] (0,0) -- (0,-1);
+  \draw [->, double] (0,0) -- (0,1);
+\end{tikzpicture}
+```
+
+하나의 거래는 보는 관점에 따라 두개의 그림으로 표현될 수 있습니다. 그림 \@ref(fig:alice-0)와 \@ref(fig:brown-0)에서 돈은 실선으로, apple(물건 또는 상품)은 선이 두개인 직선으로 표현했습니다.
 
 
 그러면 pay와 receive가 동시에 이루어지지 않는 거래도 있을까요?
 
-```{example, name="신용거래"}
+```{example, name="credit transaction in older times"}
 
 
 - 기원전 1234년 1월 1일에 Alice는 Brown에게 apple 10개를 주고, 기원전 1234년 12월 31일에 apple 12개를 받기로 하다.
 - 기원전 1234년 1월 1일에 Brown은 Alice에게 apple 10개를 받고, 기원전 1234년 12월 31일에  apple 12개를 주기로 하다. 
 ```
 
-마치 돈을 빌려주고 이자와 원금을 받는 것처럼 생각할 수 있는 거래입니다. 하지만, 중요한 차이점이 있습니다. 곡물이나 가축을 빌려주고 시간이 지난 후 원래 빌려준 것 이상으로 받을 수 있는 이유는, 곡물을 땅에 심으면 더 많은 곡물을 얻을 수 있고, 가축은 새끼를 낳음으로 그 양이 늘어난다는 알고 있었기 때문입니다.
+마치 돈을 빌려주고 이자와 원금을 받는 것처럼 생각할 수 있는 거래입니다. 하지만, 중요한 차이점이 있습니다. 곡물이나 가축을 빌려주고 시간이 지난 후 원래 빌려준 것 이상으로 받을 수 있는 이유는, 곡물을 땅에 심으면 더 많은 곡물을 얻을 수 있고, 가축은 새끼를 낳음으로 그 양이 늘어난다는 알고 있었기 때문입니다. 만기 시점은 $T$입니다.
 
 
-```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
+```{tikz, alice-1, fig.cap="Alice", fig.align="center", echo=FALSE}
 \usetikzlibrary{decorations.pathmorphing}
 \begin{tikzpicture}
   \draw (-0.5,0) -- (5.5,0);
@@ -155,9 +99,22 @@
 \end{tikzpicture}
 ```
 
+```{tikz, brown-1, fig.cap="Brown", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+
+  \draw [->, double] (0,0) -- (0,1);
+  
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,-1);
+\end{tikzpicture}
+```
+
 그러나 우리에게는 익숙한 돈을 빌려주고 이자와 원금 받는, 화폐와 신용 거래가 합쳐진 거래는 오랜 기간 금기시되어 왔습니다.
 
-```{example, name="금기시 되었던 거래"}
+```{example, name="forbidden transaction"}
 
 
 - 1234년 1월 1일에 Alice는 Brown에게 금화 10개를 주고, 1234년 12월 31일에 금화 12개를 받기로 하다.
@@ -179,11 +136,26 @@
 \end{tikzpicture}
 ```
 
-곡물이나 가축과는 달리, 화폐는 스스로 화폐를 만들어내지 못한다는 점은 오랜 논쟁거리이었습니다. 우리는 화폐와 이자를 당연한 것으로 받아들이겠습니다.
+```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+
+  \draw [->] (0,0) -- (0,1);
+  
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,-1);
+\end{tikzpicture}
+```
+
+곡물이나 가축과는 달리, 화폐는 스스로 화폐를 만들어내지 못한다는 점은 오랜 논쟁거리이었습니다. 
+
+우리는 화폐와 이자를 당연한 것으로 받아들이겠습니다. 논쟁은 다른 과목에서 하기 바랍니다.
 
 
 
-```{example, name="주식의 등장"}
+```{example, name="development of shares"}
 
 
 - 1654년 1월 1일에 Alice는 Brown에게 금화 10개를 주고, 1666년 12월 31일에 금화 10개 지분만큼의 수익을 받기로 하다.
@@ -317,4 +289,76 @@
 ```{example, name="cash flow diagram"}
 
 ```
+
+```{tikz, receive-money, fig.cap="receive money.", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \path (-0.5, 1.5) -- (5.5,-1.0);
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+ 
+  \draw [->] (0,0) -- (0,1);
+\end{tikzpicture}
+```
+
+
+```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+
+  \draw [->, double] (0,0) -- (0,-1);
+  \draw [->, dashed] (1,0) -- (1,-1);
+  \draw [->] (2,0) -- (2,-1);
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,-1);
+  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,-1);
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,-1);
+
+\draw [->, double] (0,0) -- (0,1);
+  \draw [->, dashed] (1,0) -- (1,1);
+  \draw [->] (2,0) -- (2,1);
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,1);
+  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,1);
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,1);
+\end{tikzpicture}
+```
+```{tikz, fig.cap="example", fig.align="center", echo=FALSE}
+\usetikzlibrary{decorations.pathmorphing}
+\begin{tikzpicture}
+  \draw (-0.5,0) -- (5.5,0);
+  \draw (0,0.1) -- (0,-0.1) node [anchor=north west] {0};
+  \draw (5,0.1) -- (5,-0.1) node [anchor=north west] {$T$};
+
+  \draw [->, double] (0,0) -- (0,-1);
+  \draw [->, dashed] (1,0) -- (1,-1);
+  \draw [->] (2,0) -- (2,-1);
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,-1);
+  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,-1);
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,-1);
+
+\draw [->, double] (0,0) -- (0,1);
+  \draw [->, dashed] (1,0) -- (1,1);
+  \draw [->] (2,0) -- (2,1);
+  \draw [->, double, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (5,0) -- (5,1);
+  \draw [->, dashed, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (3,0) -- (3,1);
+  \draw [->, decorate, decoration={snake, amplitude=0.4mm, segment length=2mm, post length=1mm}] (4,0) -- (4,1);
+\end{tikzpicture}
+```
+
+```{example, name="물물교환"}
+
+
+- Alice는 Brown에게 apple 1개를 주고, banana 2개를 받았다.
+- Brown은 Alice에게 banana 2개를 주고, apple 1개를 받았다. 
+```
+
+화폐가 등장하면 위의 거래를 다음과 같이 표현할 수 있습니다. 이 예에서 apple은 먹는 사과를 생각해도 되고, 애플 주식으로 생각해도 됩니다.
+
+
+
+
+
 
