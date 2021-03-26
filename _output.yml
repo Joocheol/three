@@ -1,1 +1,20 @@
+<<<<<<< HEAD
 bookdown::gitbook:
+=======
+bookdown::gitbook:
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Finanical Engineering and TensorFlow</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    download: ["pdf", "epub"]
+bookdown::html_document2:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default
+>>>>>>> ff44df25becc0c008f6b346d81b26b8e8f4890ed
